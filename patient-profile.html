@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Patient Profile - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327c">
+</head>
+<body>
+
+<header class="primary-header patient-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+  </div>
+  <div class="header-toolbar">
+    <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="patientNavLinks">Menu</button>
+    <nav class="primary-nav patient-nav-bar" id="patientNavLinks">
+      <a href="patient-dashboard.html#dashboard">Dashboard</a>
+      <a href="doctors.html">Find Doctors</a>
+      <a href="labs.html">Find Labs</a>
+      <a href="patient-payments.html">Payments</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-avatar-dropdown" id="userAvatarDropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="userAvatarBtn"
+          aria-label="Open user menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="userInitial">P</span>
+        </button>
+        <div class="user-menu" id="userMenu" role="menu" aria-label="Patient actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main-container">
+  <div class="profile-card">
+    <h2 class="page-title">Edit Patient Profile</h2>
+    <p class="profile-subtitle">Update the patient profile details shown on your dashboard.</p>
+
+    <form id="patientProfileForm" class="form">
+      <label for="patientNameInput">Full Name</label>
+      <input type="text" id="patientNameInput" placeholder="e.g. Sneha Patel" required>
+
+      <label for="patientEmailInput">Email Address</label>
+      <input type="email" id="patientEmailInput" placeholder="name@example.com" required>
+
+      <label for="patientPhoneInput">Phone Number</label>
+      <input type="tel" id="patientPhoneInput" placeholder="+91xxxxxxxxxx" required>
+
+      <div id="profileStatus" class="verification-help" aria-live="polite"></div>
+
+      <div class="form-actions">
+        <button type="submit">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script type="module" src="patient-profile.js"></script>
+<script type="module" src="mobile-nav.js?v=20260306a"></script>
+<script type="module" src="patient-header.js?v=20260326a"></script>
+<script type="module" src="patient-notifications.js?v=20260327b"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

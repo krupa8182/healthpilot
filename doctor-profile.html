@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doctor Profile - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327h" />
+</head>
+<body>
+
+<header class="primary-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+  </div>
+  <div class="header-toolbar">
+    <nav class="primary-nav doctor-header-nav" aria-label="Doctor navigation">
+      <a href="doctor-dashboard.html">Dashboard</a>
+      <a href="doctor-working-hours.html">Edit Hours</a>
+      <a href="doctor-clinic-staff.html">Clinic Staff</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-avatar-dropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="userAvatarBtn"
+          aria-label="Open user menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="userInitial">D</span>
+        </button>
+        <div class="user-menu" id="userMenu" role="menu" aria-label="Doctor actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main-container">
+
+<div class="profile-card doctor-profile-page">
+  <h2 class="page-title">Create / Edit Your Doctor Profile</h2>
+  <p class="profile-subtitle">Fill your professional details first, then use <strong>Set Working Hours</strong> to configure availability.</p>
+
+  <form id="doctorForm" class="form doctor-profile-form">
+    <div class="photo-upload">
+      <label for="photoFile">Upload Photo (optional)</label>
+      <div class="photo-upload-row">
+        <input type="url" id="image" placeholder="Photo URL (optional)" />
+        <label for="photoFile" id="choosePhotoBtn" class="ghost-btn" role="button" aria-label="Upload photo">...</label>
+      </div>
+      <small id="photoHelpText">Click the dots to choose a photo from your device.</small>
+      <input type="file" id="photoFile" accept="image/*" class="is-hidden" />
+      <div class="photo-preview-wrap is-hidden" id="photoPreviewWrap">
+        <img id="photoPreview" class="photo-preview" alt="Doctor profile preview" />
+        <button type="button" id="removePhotoBtn" class="photo-remove-btn" aria-label="Remove photo">×</button>
+      </div>
+    </div>
+    <input type="text" id="name" placeholder="Full Name" required />
+    <input type="email" id="email" placeholder="Registered Email" required />
+    <select id="specialization" required>
+      <option value="" disabled selected>Select Specialization</option>
+      <option value="General Physician">General Physician</option>
+      <option value="Cardiologist">Cardiologist</option>
+      <option value="Dermatologist">Dermatologist</option>
+      <option value="ENT Specialist">ENT Specialist</option>
+      <option value="Gynecologist">Gynecologist</option>
+      <option value="Pediatrician">Pediatrician</option>
+      <option value="Orthopedic">Orthopedic</option>
+      <option value="Neurologist">Neurologist</option>
+      <option value="Psychiatrist">Psychiatrist</option>
+      <option value="Dentist">Dentist</option>
+      <option value="Ophthalmologist">Ophthalmologist</option>
+      <option value="Radiologist">Radiologist</option>
+      <option value="Other">Other</option>
+    </select>
+    <input type="text" id="specializationOther" class="is-hidden" placeholder="Other specialization" />
+    <input type="text" id="clinic" placeholder="Clinic Name" required />
+    <input type="number" id="experience" placeholder="Years of Experience" min="0" required />
+    <input type="number" id="fee" placeholder="Consultation Fee &#8377;" min="0" required />
+    <input type="text" id="location" placeholder="Clinic Location" required />
+
+    <h3 class="section-subtitle">Verification Documents</h3>
+    <p class="verification-help">Upload required documents for admin verification. Supported formats: PDF, JPG, PNG (max 5MB each).</p>
+    
+    <div class="document-upload-section">
+      <div class="document-field">
+        <label for="medicalLicense">Medical License *</label>
+        <input type="url" id="medicalLicenseUrl" placeholder="Paste public PDF URL (demo allowed)" />
+        <div class="file-upload-row">
+          <input type="text" id="medicalLicenseName" placeholder="No file chosen" readonly />
+          <label for="medicalLicense" class="ghost-btn" role="button" aria-label="Upload medical license">...</label>
+        </div>
+        <input type="file" id="medicalLicense" accept=".pdf,.jpg,.jpeg,.png" class="is-hidden" />
+        <small>Paste a public URL or upload your medical license certificate.</small>
+      </div>
+      
+      <div class="document-field">
+        <label for="specializationCert">Specialization Certificate</label>
+        <input type="url" id="specializationCertUrl" placeholder="Paste public PDF URL (optional)" />
+        <div class="file-upload-row">
+          <input type="text" id="specializationCertName" placeholder="No file chosen" readonly />
+          <label for="specializationCert" class="ghost-btn" role="button" aria-label="Upload specialization certificate">...</label>
+        </div>
+        <input type="file" id="specializationCert" accept=".pdf,.jpg,.jpeg,.png" class="is-hidden" />
+        <small>Paste a public URL or upload certificate for your specialization.</small>
+      </div>
+      
+      <div class="document-field">
+        <label for="idProof">Government ID Proof *</label>
+        <input type="url" id="idProofUrl" placeholder="Paste public PDF URL (demo allowed)" />
+        <div class="file-upload-row">
+          <input type="text" id="idProofName" placeholder="No file chosen" readonly />
+          <label for="idProof" class="ghost-btn" role="button" aria-label="Upload government ID">...</label>
+        </div>
+        <input type="file" id="idProof" accept=".pdf,.jpg,.jpeg,.png" class="is-hidden" />
+        <small>Paste a public URL or upload Aadhaar, Passport, or Driving License.</small>
+      </div>
+    </div>
+
+    <button id="toggleWorkingHoursBtn" class="working-hours-toggle-btn" type="button">Set Working Hours</button>
+
+    <div id="workingHoursSection" class="working-hours-box is-hidden">
+      <h3>Doctor Availability</h3>
+      <p class="working-hours-note">Choose working days, timings, and slot duration.</p>
+
+      <div class="working-days-grid doctor-days-grid">
+        <label><input type="checkbox" class="day" value="Sunday"> Sunday</label>
+        <label><input type="checkbox" class="day" value="Monday"> Monday</label>
+        <label><input type="checkbox" class="day" value="Tuesday"> Tuesday</label>
+        <label><input type="checkbox" class="day" value="Wednesday"> Wednesday</label>
+        <label><input type="checkbox" class="day" value="Thursday"> Thursday</label>
+        <label><input type="checkbox" class="day" value="Friday"> Friday</label>
+        <label><input type="checkbox" class="day" value="Saturday"> Saturday</label>
+      </div>
+
+      <div class="working-hours-grid">
+        <div class="time-block time-picker-block">
+          <label>Start Time</label>
+          <div class="time-picker-row">
+            <select id="startHour" required></select>
+            <select id="startMinute" required></select>
+            <select id="startAmPm" required>
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="time-block time-picker-block">
+          <label>End Time</label>
+          <div class="time-picker-row">
+            <select id="endHour" required></select>
+            <select id="endMinute" required></select>
+            <select id="endAmPm" required>
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="lunch-break-block">
+        <h4>Lunch Break (Optional)</h4>
+        <p class="verification-help">Set a mid-day pause so patients can’t book while you’re away.</p>
+        <div class="time-picker-row">
+          <select id="lunchStartHour">
+            <option value="">Hour</option>
+          </select>
+          <select id="lunchStartMinute">
+            <option value="">Minute</option>
+          </select>
+          <select id="lunchStartAmPm">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+        <div class="time-picker-row">
+          <select id="lunchEndHour">
+            <option value="">Hour</option>
+          </select>
+          <select id="lunchEndMinute">
+            <option value="">Minute</option>
+          </select>
+          <select id="lunchEndAmPm">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="working-hours-grid">
+        <div class="time-block">
+          <label for="slotDuration">Slot Duration (minutes)</label>
+          <select id="slotDuration" required>
+            <option value="15">15 minutes</option>
+            <option value="20">20 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="45">45 minutes</option>
+            <option value="60">60 minutes</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit">Save Profile</button>
+    <p id="profileStatus" class="profile-feedback"></p>
+  </form>
+</div>
+</main>
+
+<script type="module" src="doctor-profile.js?v=20260327h"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+
+</body>
+</html>

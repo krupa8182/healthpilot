@@ -1,0 +1,23 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      ".git/**",
+      ".firebase/**",
+      ".config/**",
+      ".recovery/**",
+      "functions/**",
+      "**/node_modules/**",
+      "*.log",
+      "*.cmd",
+      "*.py",
+      "TODO.md",
+      "package-lock.json"
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinic Staff Appointments - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327c">
+</head>
+<body>
+
+<header class="primary-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+  </div>
+  <div class="header-toolbar">
+    <nav class="primary-nav">
+      <a href="clinic-staff-dashboard.html#dashboard">Dashboard</a>
+      <a href="clinic-staff-appointments.html" class="active">Appointments</a>
+    </nav>
+    <div class="header-actions">
+      <button id="editWorkingHoursBtn" class="header-nav-btn" type="button">Edit Working Hours</button>
+      <div class="user-avatar-dropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="userAvatarBtn"
+          aria-label="Open user menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="userInitial">S</span>
+        </button>
+        <div class="user-menu" id="userMenu" role="menu" aria-label="User actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="dashboard-main">
+  <div class="dashboard-content">
+    <div class="dashboard-header">
+      <h1 id="clinicName">Clinic Appointments</h1>
+      <p id="staffName">Welcome, Staff Member</p>
+    </div>
+
+    <div class="dashboard-section" id="appointments">
+      <div class="section-header">
+        <h2>Scheduled Appointments</h2>
+        <div class="section-actions">
+          <button id="refreshBtn" class="ghost-btn" type="button">Refresh</button>
+        </div>
+      </div>
+      <div id="appointmentsContainer" class="appointments-list">
+        <!-- Scheduled appointments will be loaded here -->
+      </div>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="clinic-staff-appointments.js?v=20260327d"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

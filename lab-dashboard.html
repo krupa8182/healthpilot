@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Dashboard - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327g">
+</head>
+<body>
+
+<header class="primary-header lab-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+    <p class="subtext">Lab Panel</p>
+  </div>
+  <div class="header-toolbar">
+    <nav class="primary-nav doctor-header-nav" aria-label="Lab navigation">
+      <a href="lab-dashboard.html" class="active">Dashboard</a>
+      <a href="lab-working-hours.html">Edit Hours</a>
+      <a href="lab-tests.html">Edit Tests</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-avatar-dropdown" id="labAvatarDropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="labAvatarBtn"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-label="Open user menu"
+        >
+          <span id="labAvatarInitial">L</span>
+        </button>
+        <div class="user-menu" id="labAvatarMenu" role="menu" aria-label="User actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="main-container">
+  <section class="rejected-profile-banner is-hidden" id="labRejectedBanner">
+    <div>
+      <p class="rejected-profile-kicker">Profile Rejected</p>
+      <h3 id="labRejectedTitle">Your lab profile needs updates before it can go live.</h3>
+      <p id="labRejectedMessage" class="rejected-profile-message"></p>
+    </div>
+    <button id="labRejectedEditBtn" class="confirm-banner-btn" type="button">Edit Profile</button>
+  </section>
+
+  <section class="dashboard-hero-card">
+    <div>
+      <p class="section-kicker">Lab Workspace</p>
+      <h3 id="labTitle">Laboratory</h3>
+      <p id="labMeta"></p>
+    </div>
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <p class="stat-label">Total Bookings</p>
+        <p class="stat-value" id="totalBookings">0</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Upcoming</p>
+        <p class="stat-value" id="pendingBookings">0</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Completed</p>
+        <p class="stat-value" id="completedBookings">0</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-btn active" data-status="approved">Upcoming</button>
+      <button class="tab-btn" data-status="completed">Completed</button>
+      <button class="tab-btn" data-status="cancelled">Cancelled</button>
+    </div>
+    <div id="labBookingsContainer"></div>
+  </div>
+</div>
+
+<script type="module" src="authCheck.js"></script>
+<script type="module" src="lab-dashboard.js?v=20260327g"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

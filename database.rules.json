@@ -1,0 +1,81 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && (auth.uid === $uid || root.child('users/' + auth.uid + '/role').val() === 'admin' || (root.child('users/' + auth.uid + '/role').val() === 'doctor' && data.exists() && data.child('role').val() === 'clinic_staff' && data.child('clinicCode').val() === root.child('doctors/' + auth.uid + '/clinicCode').val() && newData.child('name').val() === data.child('name').val() && newData.child('phone').val() === data.child('phone').val() && newData.child('role').val() === data.child('role').val() && newData.child('email').val() === data.child('email').val() && newData.child('specialization').val() === data.child('specialization').val() && newData.child('clinicCode').val() === data.child('clinicCode').val() && newData.child('linkedDoctorUID').val() === data.child('linkedDoctorUID').val() && newData.child('createdAt').val() === data.child('createdAt').val() && newData.child('emailVerificationRequired').val() === data.child('emailVerificationRequired').val() && newData.child('verifiedAt').val() === data.child('verifiedAt').val() && (newData.child('status').val() === 'active' || newData.child('status').val() === 'rejected') && newData.child('approvedBy').val() === auth.uid && newData.child('staffApprovalUpdatedAt').isNumber()))"
+      }
+    },
+    "pendingRegistrations": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "doctors": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && (auth.uid === $uid || root.child('users/' + auth.uid + '/role').val() === 'admin')",
+        "availability": {
+          ".write": "auth != null && (auth.uid === $uid || root.child('users/' + auth.uid + '/role').val() === 'admin' || (root.child('users/' + auth.uid + '/role').val() === 'clinic_staff' && root.child('users/' + auth.uid + '/status').val() === 'active' && ((root.child('users/' + auth.uid + '/linkedDoctorUID').val() === $uid) || (root.child('users/' + auth.uid + '/clinicCode').val() !== null && root.child('users/' + auth.uid + '/clinicCode').val() === root.child('doctors/' + $uid + '/clinicCode').val()))))"
+        },
+        "blockedSlots": {
+          ".write": "auth != null && (auth.uid === $uid || root.child('users/' + auth.uid + '/role').val() === 'admin' || (root.child('users/' + auth.uid + '/role').val() === 'clinic_staff' && root.child('users/' + auth.uid + '/status').val() === 'active' && ((root.child('users/' + auth.uid + '/linkedDoctorUID').val() === $uid) || (root.child('users/' + auth.uid + '/clinicCode').val() !== null && root.child('users/' + auth.uid + '/clinicCode').val() === root.child('doctors/' + $uid + '/clinicCode').val()))))"
+        }
+      }
+    },
+    "labs": {
+      ".read": "auth != null",
+      "$uid": {
+        ".write": "auth != null && ((auth.uid === $uid && root.child('users/' + auth.uid + '/role').val() === 'lab') || root.child('users/' + auth.uid + '/role').val() === 'admin')"
+      }
+    },
+    "reviews": {
+      "$doctorId": {
+        ".read": "auth != null",
+        "$reviewId": {
+          ".write": "auth != null && root.child('users/' + auth.uid + '/role').val() === 'patient'"
+        }
+      }
+    },
+    "labReports": {
+      "$reportId": {
+        ".read": "auth != null && (data.child('patientUID').val() === auth.uid || data.child('labUID').val() === auth.uid)",
+        ".write": "auth != null && root.child('users/' + auth.uid + '/role').val() === 'lab' && newData.child('labUID').val() === auth.uid"
+      }
+    },
+    "appointments": {
+      ".read": "auth != null && ((query.orderByChild == 'doctorUID' && query.equalTo != null) || (query.orderByChild == 'patientUID' && query.equalTo == auth.uid) || (query.orderByChild == 'doctorUID' && query.equalTo == root.child('users/' + auth.uid + '/linkedDoctorUID').val()))",
+      ".indexOn": ["doctorUID", "patientUID", "status"],
+      "$appointmentId": {
+        ".read": "auth != null && (data.child('patientUID').val() === auth.uid || data.child('doctorUID').val() === auth.uid || (root.child('users/' + auth.uid + '/role').val() === 'clinic_staff' && root.child('users/' + auth.uid + '/linkedDoctorUID').val() === data.child('doctorUID').val()))",
+        ".write": "auth != null && ((!data.exists() && newData.child('patientUID').val() === auth.uid && newData.child('doctorUID').isString() && newData.child('date').isString() && newData.child('time').isString() && (newData.child('status').val() === 'pending' || newData.child('status').val() === 'approved')) || (data.exists() && !newData.exists() && data.child('patientUID').val() === auth.uid && data.child('status').val() === 'approved' && data.child('payment').child('status').val() === 'pending') || (data.exists() && data.child('patientUID').val() === auth.uid && (data.child('status').val() === 'pending' || data.child('status').val() === 'approved') && newData.child('status').val() === 'cancelled' && newData.child('patientUID').val() === data.child('patientUID').val() && newData.child('doctorUID').val() === data.child('doctorUID').val() && newData.child('date').val() === data.child('date').val() && newData.child('time').val() === data.child('time').val()) || (data.exists() && (root.child('users/' + auth.uid + '/role').val() === 'doctor' || (root.child('users/' + auth.uid + '/role').val() === 'clinic_staff' && root.child('users/' + auth.uid + '/linkedDoctorUID').val() === data.child('doctorUID').val())) && (data.child('status').val() === 'pending' || data.child('status').val() === 'approved') && (newData.child('status').val() === 'cancelled' || newData.child('status').val() === 'rejected') && newData.child('patientUID').val() === data.child('patientUID').val() && newData.child('doctorUID').val() === data.child('doctorUID').val() && newData.child('date').val() === data.child('date').val() && newData.child('time').val() === data.child('time').val()) || (data.exists() && data.child('patientUID').val() === auth.uid && data.child('status').val() === 'approved' && newData.child('status').val() === 'approved' && newData.child('patientUID').val() === data.child('patientUID').val() && newData.child('doctorUID').val() === data.child('doctorUID').val() && newData.child('date').val() === data.child('date').val() && newData.child('time').val() === data.child('time').val() && newData.child('problem').val() === data.child('problem').val() && newData.child('createdAt').val() === data.child('createdAt').val() && newData.child('patientConfirmed').val() === true && (newData.child('payment').child('status').val() === 'paid' || newData.child('payment').child('status').val() === 'unpaid') && newData.child('payment').child('amount').val() === data.child('payment').child('amount').val() && newData.child('payment').child('currency').val() === data.child('payment').child('currency').val()))"
+      }
+    },
+    "labBookings": {
+      ".read": "auth != null && ((query.orderByChild == 'patientUID' && query.equalTo == auth.uid) || (query.orderByChild == 'labUID' && (root.child('users/' + auth.uid + '/role').val() === 'lab' || root.child('users/' + auth.uid + '/role').val() === 'patient')))",
+      ".indexOn": ["labUID", "patientUID", "status"],
+      "$bookingId": {
+        ".read": "auth != null && (data.child('patientUID').val() === auth.uid || data.child('labUID').val() === auth.uid)",
+        ".write": "auth != null && ((!data.exists() && newData.child('patientUID').val() === auth.uid && newData.child('labUID').isString() && newData.child('testName').isString() && newData.child('date').isString() && newData.child('time').isString() && (newData.child('status').val() === 'approved' || newData.child('status').val() === 'pending')) || (data.exists() && data.child('patientUID').val() === auth.uid && (data.child('status').val() === 'approved' || data.child('status').val() === 'pending') && (newData.child('status').val() === 'approved' || newData.child('status').val() === 'pending') && newData.child('patientUID').val() === data.child('patientUID').val() && newData.child('labUID').val() === data.child('labUID').val() && newData.child('date').val() === data.child('date').val() && newData.child('time').val() === data.child('time').val() && newData.child('testName').val() === data.child('testName').val() && newData.child('testPrice').val() === data.child('testPrice').val() && newData.child('createdAt').val() === data.child('createdAt').val() && (newData.child('payment').child('status').val() === 'paid' || newData.child('payment').child('status').val() === 'unpaid' || newData.child('payment').child('status').val() === 'pending') && newData.child('payment').child('amount').val() === data.child('payment').child('amount').val() && newData.child('payment').child('currency').val() === data.child('payment').child('currency').val()) || (data.exists() && data.child('patientUID').val() === auth.uid && (data.child('status').val() === 'approved' || data.child('status').val() === 'pending' || data.child('status').val() === 'completed') && newData.child('status').val() === 'cancelled' && newData.child('patientUID').val() === data.child('patientUID').val() && newData.child('labUID').val() === data.child('labUID').val() && newData.child('date').val() === data.child('date').val() && newData.child('time').val() === data.child('time').val() && newData.child('testName').val() === data.child('testName').val()) || (data.exists() && data.child('labUID').val() === auth.uid && newData.child('patientUID').val() === data.child('patientUID').val() && newData.child('labUID').val() === data.child('labUID').val() && newData.child('date').val() === data.child('date').val() && newData.child('time').val() === data.child('time').val() && newData.child('testName').val() === data.child('testName').val() && (newData.child('status').val() === 'approved' || newData.child('status').val() === 'pending' || newData.child('status').val() === 'completed' || newData.child('status').val() === 'cancelled')))"
+      }
+    },
+    "payments": {
+      ".read": "auth != null && query.orderByChild == 'uid' && query.equalTo == auth.uid",
+      ".indexOn": ["uid", "createdAt"],
+      "$paymentId": {
+        ".read": "auth != null && data.child('uid').val() === auth.uid",
+        ".write": "auth != null && !data.exists() && newData.child('uid').val() === auth.uid"
+      }
+    },
+    "refunds": {
+      "$refundId": {
+        ".read": "auth != null && data.child('uid').val() === auth.uid",
+        ".write": false
+      }
+    }
+  }
+}
+

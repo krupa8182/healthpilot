@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinic Staff Dashboard - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327c">
+</head>
+<body>
+
+<header class="primary-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+  </div>
+  <div class="header-toolbar">
+    <nav class="primary-nav">
+      <a href="clinic-staff-dashboard.html#dashboard" class="active">Dashboard</a>
+      <a href="clinic-staff-appointments.html">Appointments</a>
+    </nav>
+    <div class="header-actions">
+      <button id="editWorkingHoursBtn" class="header-nav-btn" type="button">Edit Working Hours</button>
+      <div class="user-avatar-dropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="userAvatarBtn"
+          aria-label="Open user menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="userInitial">S</span>
+        </button>
+        <div class="user-menu" id="userMenu" role="menu" aria-label="User actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="dashboard-main">
+  <div class="dashboard-content" id="dashboard">
+    <div class="dashboard-header">
+      <h1 id="clinicName">Clinic Dashboard</h1>
+      <p id="staffName">Welcome, Staff Member</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Today's Appointments</h3>
+        <div class="stat-number" id="todayAppointments">0</div>
+      </div>
+      <div class="stat-card">
+        <h3>Pending Appointments</h3>
+        <div class="stat-number" id="pendingAppointments">0</div>
+      </div>
+      <div class="stat-card">
+        <h3>Total Patients</h3>
+        <div class="stat-number" id="totalPatients">0</div>
+      </div>
+    </div>
+
+    <div class="dashboard-section" id="appointments">
+      <div class="section-header">
+        <h2>Your Appointments</h2>
+        <div class="section-actions">
+          <button id="refreshBtn" class="ghost-btn">Refresh</button>
+        </div>
+      </div>
+      <div class="tabs">
+        <button class="tab-btn active" data-status="approved" type="button">Upcoming</button>
+        <button class="tab-btn" data-status="cancelled" type="button">Cancelled</button>
+      </div>
+      <div id="appointmentsContainer" class="appointments-list">
+        <!-- Appointments will be loaded here -->
+      </div>
+    </div>
+
+    <div class="container working-hours-card is-hidden" id="workingHoursSection">
+      <button id="backToDashboardBtn" class="back-link-btn" type="button">&#8592; Back to Dashboard</button>
+      <h2>Edit Working Hours</h2>
+      <p class="working-hours-note">Manage the linked doctor's available days, timings, slot duration, lunch break, and blocked slots from here.</p>
+
+      <div class="working-days-grid">
+        <label><input type="checkbox" class="working-day" value="0"> Sunday</label>
+        <label><input type="checkbox" class="working-day" value="1"> Monday</label>
+        <label><input type="checkbox" class="working-day" value="2"> Tuesday</label>
+        <label><input type="checkbox" class="working-day" value="3"> Wednesday</label>
+        <label><input type="checkbox" class="working-day" value="4"> Thursday</label>
+        <label><input type="checkbox" class="working-day" value="5"> Friday</label>
+        <label><input type="checkbox" class="working-day" value="6"> Saturday</label>
+      </div>
+
+      <div class="working-hours-grid">
+        <div class="time-block">
+          <label>Start Time</label>
+          <div class="time-selects">
+            <select id="startHour"></select>
+            <select id="startMinute">
+              <option value="00">00</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+              <option value="45">45</option>
+            </select>
+            <select id="startPeriod">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <label>End Time</label>
+          <div class="time-selects">
+            <select id="endHour"></select>
+            <select id="endMinute">
+              <option value="00">00</option>
+              <option value="15">15</option>
+              <option value="30">30</option>
+              <option value="45">45</option>
+            </select>
+            <select id="endPeriod">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <label>Slot Duration (minutes)</label>
+          <select id="slotDuration">
+            <option value="15" selected>15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="lunch-break-block">
+        <h4>Lunch Break (Optional)</h4>
+        <p class="verification-help">Set a break so patients cannot book while the doctor is away.</p>
+        <div class="time-picker-row">
+          <select id="lunchStartHour">
+            <option value="">Hour</option>
+          </select>
+          <select id="lunchStartMinute">
+            <option value="">Minute</option>
+            <option value="00">00</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+          </select>
+          <select id="lunchStartPeriod">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+        <div class="time-picker-row">
+          <select id="lunchEndHour">
+            <option value="">Hour</option>
+          </select>
+          <select id="lunchEndMinute">
+            <option value="">Minute</option>
+            <option value="00">00</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+          </select>
+          <select id="lunchEndPeriod">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="working-hours-box slot-blocker-box">
+        <h3>Block Specific Slots</h3>
+        <p>Select a date, then click an available slot to block it. Click a blocked slot again to reopen it.</p>
+        <label for="blockedSlotDate">Choose Date</label>
+        <input type="date" id="blockedSlotDate">
+        <p id="blockedSlotHelp" class="verification-help">Booked slots stay locked. Only open slots can be blocked or reopened.</p>
+        <div id="doctorBlockedSlotList"></div>
+      </div>
+
+      <button id="saveWorkingHours" type="button">Save Working Hours</button>
+    </div>
+  </div>
+</main>
+
+<script type="module" src="clinic-staff-dashboard.js?v=20260327i"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Lab Test - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327g">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body data-flow-nav="back" data-flow-target="labs.html" data-flow-label="Back to Labs" data-flow-container="body">
+
+<header class="primary-header patient-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+  </div>
+  <div class="header-toolbar">
+    <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="patientNavLinks">Menu</button>
+    <nav class="primary-nav patient-nav-bar" id="patientNavLinks">
+      <a href="patient-dashboard.html#dashboard">Dashboard</a>
+      <a href="doctors.html">Find Doctors</a>
+      <a href="labs.html" class="active">Find Labs</a>
+      <a href="patient-payments.html">Payments</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-avatar-dropdown" id="userAvatarDropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="userAvatarBtn"
+          aria-label="Open user menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="userInitial">P</span>
+        </button>
+        <div class="user-menu" id="userMenu" role="menu" aria-label="Patient actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<h2>Book Pathology Test</h2>
+
+<form id="labBookingForm" class="doctor-card">
+  <p id="labNameText"></p>
+
+  <label for="testSelect">Select Test:</label>
+  <select id="testSelect" required>
+    <option value="" selected disabled>Select a test</option>
+  </select>
+  <p id="testRequirement" class="test-requirement" aria-live="polite"></p>
+
+  <div id="feeDisplay" style="display: none;">
+    <h3>Test Fee: Rs. <span id="feeAmount"></span></h3>
+  </div>
+
+  <label for="date">Select Date:</label>
+  <input type="date" id="date" required>
+
+  <input type="hidden" id="time">
+
+  <label>Select Time Slot:</label>
+  <div id="timeSlots"></div>
+
+  <label for="notes">Notes (optional):</label>
+  <textarea id="notes" placeholder="Fasting details, symptoms, etc."></textarea>
+
+  <h3 class="section-subtitle">Choose Payment Method</h3>
+  <div class="payment-methods">
+    <label>
+      <input type="radio" name="paymentMethod" value="cash" checked>
+      Cash on visit
+    </label>
+    <label>
+      <input type="radio" name="paymentMethod" value="online">
+      Online payment (Razorpay)
+    </label>
+  </div>
+  <div class="form-actions">
+    <button type="submit">Book Lab Test</button>
+  </div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script type="module" src="mobile-nav.js?v=20260306a"></script>
+<script type="module" src="patient-header.js?v=20260326a"></script>
+<script type="module" src="patient-notifications.js?v=20260327b"></script>
+<script type="module" src="authCheck.js"></script>
+<script type="module" src="lab-booking.js?v=20260327j"></script>
+<script type="module" src="back-button.js"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

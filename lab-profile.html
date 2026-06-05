@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab Profile - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327g" />
+</head>
+<body>
+
+<header class="primary-header lab-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+    <p class="subtext">Lab Panel</p>
+  </div>
+  <div class="header-toolbar">
+    <nav class="primary-nav doctor-header-nav" aria-label="Lab navigation">
+      <a href="lab-dashboard.html">Dashboard</a>
+      <a href="lab-working-hours.html">Edit Hours</a>
+      <a href="lab-tests.html">Edit Tests</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-avatar-dropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="userAvatarBtn"
+          aria-label="Open user menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="userInitial">L</span>
+        </button>
+        <div class="user-menu" id="userMenu" role="menu" aria-label="Lab actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main-container">
+
+<div class="profile-card doctor-profile-page">
+  <h2 class="page-title">Create / Edit Lab Profile</h2>
+  <p class="profile-subtitle">Set lab details, available tests, and working days/timings for online bookings.</p>
+
+  <form id="labForm" class="form doctor-profile-form">
+    <input type="text" id="labName" placeholder="Lab / Clinic Name" required />
+    <input type="text" id="contactName" placeholder="Contact Person Name" required />
+    <label class="phone-field">
+      <span class="phone-prefix">+91</span>
+      <input
+        type="tel"
+        id="phone"
+        placeholder="Lab Phone Number (10 digits)"
+        required
+      />
+    </label>
+    <input type="text" id="location" placeholder="Lab Address / Location" required />
+
+    <h3 class="section-subtitle">Tests Offered</h3>
+    <p class="verification-help">Add each test name, price, and any optional preparation notes in one clean list.</p>
+    <div class="tests-editor">
+      <div class="tests-editor-header">
+        <span>Test Name</span>
+        <span>Price (Rs.)</span>
+        <span>Notes (Optional)</span>
+        <span></span>
+      </div>
+      <div id="testsList" class="tests-list"></div>
+      <button type="button" id="addTestBtn" class="add-test-btn">+ Add Test</button>
+    </div>
+
+    <h3 class="section-subtitle">Working Days</h3>
+    <div class="working-days-grid doctor-days-grid">
+      <label><input type="checkbox" class="day" value="Sunday"> Sunday</label>
+      <label><input type="checkbox" class="day" value="Monday"> Monday</label>
+      <label><input type="checkbox" class="day" value="Tuesday"> Tuesday</label>
+      <label><input type="checkbox" class="day" value="Wednesday"> Wednesday</label>
+      <label><input type="checkbox" class="day" value="Thursday"> Thursday</label>
+      <label><input type="checkbox" class="day" value="Friday"> Friday</label>
+      <label><input type="checkbox" class="day" value="Saturday"> Saturday</label>
+    </div>
+
+    <div class="working-hours-grid">
+      <div class="time-block time-picker-block">
+        <label>Start Time</label>
+        <div class="time-picker-row">
+          <select id="startHour" required></select>
+          <select id="startMinute" required></select>
+          <select id="startAmPm" required>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="time-block time-picker-block">
+        <label>End Time</label>
+        <div class="time-picker-row">
+          <select id="endHour" required></select>
+          <select id="endMinute" required></select>
+          <select id="endAmPm" required>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="lunch-break-block lab-lunch-break">
+      <div class="lunch-break-copy">
+        <h4>Lunch Break (Optional)</h4>
+        <p class="verification-help">Set a short pause if the lab is temporarily closed during the day.</p>
+      </div>
+      <div class="lunch-break-fields">
+        <div class="time-block time-picker-block">
+          <label for="lunchStartHour">Start</label>
+          <div class="time-picker-row">
+            <select id="lunchStartHour">
+              <option value="">Hour</option>
+            </select>
+            <select id="lunchStartMinute">
+              <option value="">Minute</option>
+            </select>
+            <select id="lunchStartAmPm">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="time-block time-picker-block">
+          <label for="lunchEndHour">End</label>
+          <div class="time-picker-row">
+            <select id="lunchEndHour">
+              <option value="">Hour</option>
+            </select>
+            <select id="lunchEndMinute">
+              <option value="">Minute</option>
+            </select>
+            <select id="lunchEndAmPm">
+              <option value="AM">AM</option>
+              <option value="PM">PM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="working-hours-grid working-hours-grid--secondary">
+      <div class="time-block">
+        <label for="slotDuration">Slot Duration (minutes)</label>
+        <select id="slotDuration" required>
+          <option value="10">10 minutes</option>
+          <option value="15">15 minutes</option>
+          <option value="20">20 minutes</option>
+          <option value="30">30 minutes</option>
+        </select>
+      </div>
+      <div class="time-block">
+        <label for="maxPerSlot">Max bookings per slot</label>
+        <input type="number" id="maxPerSlot" min="1" max="20" value="2" required>
+      </div>
+    </div>
+
+    <h3 class="section-subtitle">Verification Documents</h3>
+    <p class="verification-help">Upload required documents for admin verification. Supported formats: PDF, JPG, PNG (max 5MB each).</p>
+    <p class="verification-help demo-note">Demo documents are acceptable for academic projects. Add a "DEMO ONLY" watermark.</p>
+    
+    <div class="document-upload-section">
+      <div class="document-field">
+        <label for="labLicense">Lab License/Certificate *</label>
+        <input type="url" id="labLicenseUrl" placeholder="Paste public PDF URL (demo allowed)" />
+        <input type="file" id="labLicense" accept=".pdf,.jpg,.jpeg,.png" />
+        <small>Paste a public URL or upload your lab's operating license or accreditation certificate</small>
+      </div>
+      
+      <div class="document-field">
+        <label for="nablCert">NABL Accreditation (if applicable)</label>
+        <input type="url" id="nablCertUrl" placeholder="Paste public PDF URL (optional)" />
+        <input type="file" id="nablCert" accept=".pdf,.jpg,.jpeg,.png" />
+        <small>Paste a public URL or upload NABL or other quality accreditation certificate</small>
+      </div>
+      
+      <div class="document-field">
+        <label for="idProof">Contact Person ID Proof *</label>
+        <input type="url" id="idProofUrl" placeholder="Paste public PDF URL (demo allowed)" />
+        <input type="file" id="idProof" accept=".pdf,.jpg,.jpeg,.png" />
+        <small>Paste a public URL or upload Aadhaar, Passport, or Driving License of contact person</small>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit">Save Lab Profile</button>
+    </div>
+  </form>
+</div>
+</main>
+
+<script type="module" src="authCheck.js"></script>
+<script type="module" src="lab-profile.js?v=20260327d"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

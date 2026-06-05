@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - HealthPilot</title>
+    <link rel="stylesheet" href="doctors.css?v=20260327i">
+</head>
+
+<body class="auth-page" data-active-header="login" data-flow-nav="close" data-flow-target="index.html">
+
+<header class="primary-header compact-header">
+    <div class="logo">
+        <span>HealthPilot</span>
+    </div>
+    <div class="header-actions">
+        <a class="ghost-btn" href="login.html" data-role="login">Login</a>
+        <a class="ghost-btn" href="register.html" data-role="register">Register</a>
+    </div>
+</header>
+
+<section class="hero login-hero auth-hero">
+    <div class="auth-shell">
+        <div class="auth-content">
+            <div class="auth-showcase">
+                <div class="auth-copy">
+                    <p class="auth-kicker">HealthPilot Care Hub</p>
+                    <h1>Healthcare journeys that feel calm, modern, and easy to manage.</h1>
+                    <p>Sign in to track doctor visits, lab bookings, confirmations, and care updates from one beautifully organized dashboard.</p>
+                </div>
+
+                <div class="auth-highlights" aria-label="HealthPilot services">
+                    <span class="auth-chip">Doctor consultations</span>
+                    <span class="auth-chip">Lab bookings</span>
+                    <span class="auth-chip">Follow-up updates</span>
+                    <span class="auth-chip">Role-based dashboards</span>
+                </div>
+
+                <div class="auth-scene" aria-hidden="true">
+                    <span class="auth-cloud auth-cloud--one"></span>
+                    <span class="auth-cloud auth-cloud--two"></span>
+                    <span class="auth-cloud auth-cloud--three"></span>
+                    <div class="auth-skyline"></div>
+                    <div class="auth-district">
+                        <article class="auth-hub auth-hub--clinic"><span>Clinic</span></article>
+                        <article class="auth-hub auth-hub--hospital"><span>Hospital</span></article>
+                        <article class="auth-hub auth-hub--pharmacy"><span>Pharmacy</span></article>
+                        <article class="auth-hub auth-hub--lab"><span>Laboratory</span></article>
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-card auth-card">
+                <div class="auth-card-head">
+                    <p class="auth-form-kicker">Welcome back</p>
+                    <h2>Sign in to your account</h2>
+                    <p>Access your dashboard, appointments, and care activity without changing any of your current flow.</p>
+                </div>
+
+                <form id="loginForm" class="form" autocomplete="off">
+                    <input type="email" id="email" placeholder="Email" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" title="Enter a valid email address" autocomplete="email" list="emailSuggestions">
+                    <datalist id="emailSuggestions"></datalist>
+                    <div class="password-field">
+                        <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+                        <button type="button" class="password-toggle" data-password-toggle="password" aria-label="Show password" aria-pressed="false">
+                            <svg class="password-toggle__icon password-toggle__icon--show" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" />
+                                <circle cx="12" cy="12" r="3.25" />
+                            </svg>
+                            <svg class="password-toggle__icon password-toggle__icon--hide" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M3 4.5 20 21.5" />
+                                <path d="M10.7 6.2A11.6 11.6 0 0 1 12 6c6.5 0 10 6 10 6a17.6 17.6 0 0 1-3.3 3.9" />
+                                <path d="M6.1 17.4C3.5 15.7 2 12.9 2 12.9s1.4-2.4 4-4.3" />
+                                <path d="M9.9 14.1A3.2 3.2 0 0 1 9 12c0-1 .4-1.9 1-2.5" />
+                                <path d="M14.2 14.6c-.6.4-1.4.7-2.2.7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="forgotPasswordBtn" class="ghost-btn">Forgot Password?</button>
+                    </div>
+
+                    <button type="submit">Login</button>
+                </form>
+
+                <p class="signup-text">
+                    Don't have an account? <a href="register.html">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="module" src="firebase-client.js"></script>
+<script type="module" src="login.js?v=20260327n"></script>
+<script type="module" src="back-button.js"></script>
+<script src="header-toggle.js"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+
+</body>
+</html>

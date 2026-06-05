@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Doctors - HealthPilot</title>
+<link rel="stylesheet" href="doctors.css?v=20260327a">
+</head>
+
+<body class="directory-page doctors-directory-page">
+
+<header class="primary-header patient-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+  </div>
+  <div class="header-toolbar">
+    <button class="mobile-nav-toggle" type="button" aria-expanded="false" aria-controls="patientNavLinks">Menu</button>
+    <nav class="primary-nav patient-nav-bar" id="patientNavLinks">
+      <a href="patient-dashboard.html#dashboard">Dashboard</a>
+      <a href="doctors.html" class="active">Find Doctors</a>
+      <a href="labs.html">Find Labs</a>
+      <a href="patient-payments.html">Payments</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-avatar-dropdown" id="userAvatarDropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="userAvatarBtn"
+          aria-label="Open user menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="userInitial">P</span>
+        </button>
+        <div class="user-menu" id="userMenu" role="menu" aria-label="Patient actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="directory-hero">
+  <p class="section-kicker centered-directory-kicker">Find The Right Doctor</p>
+</section>
+
+
+<!-- SEARCH SECTION -->
+
+<div class="search-box">
+
+<input type="text" id="searchInput" placeholder="Search doctors by name">
+
+<select id="specializationFilter">
+
+<option value="">All Specializations</option>
+<option value="ENT">ENT</option>
+<option value="Pediatrician">Pediatrician</option>
+<option value="Physician">Physician</option>
+<option value="Dentist">Dentist</option>
+<option value="Orthopedic">Orthopedic</option>
+<option value="Gynecologist">Gynecologist</option>
+<option value="Infertility Specialist">Infertility Specialist</option>
+<option value="Gastroenterologist">Gastroenterologist</option>
+<option value="Dermatologist">Dermatologist</option>
+
+</select>
+
+</div>
+
+
+<!-- DOCTOR LIST -->
+
+<div id="doctorList"></div>
+
+
+<script type="module" src="mobile-nav.js?v=20260306a"></script>
+<script type="module" src="patient-header.js?v=20260326a"></script>
+<script type="module" src="patient-notifications.js?v=20260327b"></script>
+<script type="module" src="doctors.js"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+
+</body>
+</html>

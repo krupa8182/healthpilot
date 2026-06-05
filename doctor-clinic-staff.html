@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Clinic Staff - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327f">
+</head>
+<body>
+
+<header class="primary-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+  </div>
+  <div class="header-toolbar">
+    <nav class="primary-nav doctor-header-nav" aria-label="Doctor navigation">
+      <a href="doctor-dashboard.html">Dashboard</a>
+      <a href="doctor-working-hours.html">Edit Hours</a>
+      <a href="doctor-clinic-staff.html" class="active">Clinic Staff</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-avatar-dropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="userAvatarBtn"
+          aria-label="Open user menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="userInitial">D</span>
+        </button>
+        <div class="user-menu" id="userMenu" role="menu" aria-label="Doctor actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main-container">
+  <div class="container working-hours-card">
+    <h2 id="pageTitle">Clinic Staff Management</h2>
+    <p id="pageSubtitle">Manage your clinic receptionists and administrative staff.</p>
+
+    <div class="working-hours-box">
+      <h3>Clinic Access Code</h3>
+      <div class="doctor-inline-actions">
+        <input type="text" id="clinicCodeDisplay" readonly class="doctor-code-input">
+        <button id="generateClinicCodeBtn" class="primary-btn" type="button">Generate New Code</button>
+      </div>
+      <p class="doctor-inline-note">Share this code with your staff so they can register as clinic staff.</p>
+    </div>
+
+    <div class="staff-list" id="staffListContainer"></div>
+  </div>
+</main>
+
+<script type="module" src="doctor-clinic-staff.js?v=20260327b"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

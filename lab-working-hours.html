@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab Working Hours - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327g">
+</head>
+<body>
+
+<header class="primary-header lab-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+    <p class="subtext">Lab Panel</p>
+  </div>
+  <div class="header-toolbar">
+    <nav class="primary-nav doctor-header-nav" aria-label="Lab navigation">
+      <a href="lab-dashboard.html">Dashboard</a>
+      <a href="lab-working-hours.html" class="active">Edit Hours</a>
+      <a href="lab-tests.html">Edit Tests</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-avatar-dropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="userAvatarBtn"
+          aria-label="Open user menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="userInitial">L</span>
+        </button>
+        <div class="user-menu" id="userMenu" role="menu" aria-label="Lab actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main-container">
+  <div class="container working-hours-card">
+    <h2 id="pageTitle">Edit Working Hours</h2>
+    <p id="pageSubtitle" class="working-hours-note">Manage your lab timings, slot duration, capacity, lunch break, and blocked booking slots in one place.</p>
+
+    <div class="working-days-grid">
+      <label><input type="checkbox" class="working-day" value="0"> Sunday</label>
+      <label><input type="checkbox" class="working-day" value="1"> Monday</label>
+      <label><input type="checkbox" class="working-day" value="2"> Tuesday</label>
+      <label><input type="checkbox" class="working-day" value="3"> Wednesday</label>
+      <label><input type="checkbox" class="working-day" value="4"> Thursday</label>
+      <label><input type="checkbox" class="working-day" value="5"> Friday</label>
+      <label><input type="checkbox" class="working-day" value="6"> Saturday</label>
+    </div>
+
+    <div class="working-hours-grid">
+      <div class="time-block">
+        <label>Start Time</label>
+        <div class="time-selects">
+          <select id="startHour"></select>
+          <select id="startMinute">
+            <option value="00">00</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+          </select>
+          <select id="startPeriod">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <label>End Time</label>
+        <div class="time-selects">
+          <select id="endHour"></select>
+          <select id="endMinute">
+            <option value="00">00</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+          </select>
+          <select id="endPeriod">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <label>Slot Duration (minutes)</label>
+        <select id="slotDuration">
+          <option value="10">10</option>
+          <option value="15" selected>15</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="45">45</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="working-hours-grid working-hours-grid--secondary">
+      <div class="time-block">
+        <label for="maxPerSlot">Max bookings per slot</label>
+        <input type="number" id="maxPerSlot" min="1" max="20" value="2">
+      </div>
+    </div>
+
+    <div class="lunch-break-block">
+      <h4>Lunch Break (Optional)</h4>
+      <p class="verification-help">Set a short break so patients cannot choose slots while the lab is closed.</p>
+      <div class="time-picker-row">
+        <select id="lunchStartHour">
+          <option value="">Hour</option>
+        </select>
+        <select id="lunchStartMinute">
+          <option value="">Minute</option>
+          <option value="00">00</option>
+          <option value="15">15</option>
+          <option value="30">30</option>
+          <option value="45">45</option>
+        </select>
+        <select id="lunchStartPeriod">
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+      <div class="time-picker-row">
+        <select id="lunchEndHour">
+          <option value="">Hour</option>
+        </select>
+        <select id="lunchEndMinute">
+          <option value="">Minute</option>
+          <option value="00">00</option>
+          <option value="15">15</option>
+          <option value="30">30</option>
+          <option value="45">45</option>
+        </select>
+        <select id="lunchEndPeriod">
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="working-hours-box slot-blocker-box">
+      <h3>Block Specific Slots</h3>
+      <p>Select a date, then click an open slot to block it. Click a blocked slot again to reopen it.</p>
+      <label for="blockedSlotDate">Choose Date</label>
+      <input type="date" id="blockedSlotDate">
+      <p id="blockedSlotHelp" class="verification-help">Booked or full slots stay locked. Open slots can be blocked or reopened anytime.</p>
+      <div id="labBlockedSlotList"></div>
+    </div>
+
+    <button id="saveWorkingHours" type="button">Save Working Hours</button>
+  </div>
+</main>
+
+<script type="module" src="lab-working-hours.js?v=20260327a"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

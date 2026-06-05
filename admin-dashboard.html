@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327g">
+</head>
+<body>
+
+<header class="primary-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+  </div>
+  <div class="header-toolbar">
+    <nav class="primary-nav" aria-label="Admin navigation">
+      <a href="admin-dashboard.html" class="active">Dashboard</a>
+    </nav>
+    <div class="header-actions">
+      <div class="user-avatar-dropdown" id="adminAvatarDropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="adminAvatarBtn"
+          aria-label="Open admin menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="adminInitial">A</span>
+        </button>
+        <div class="user-menu" id="adminMenu" role="menu" aria-label="Admin actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main-container">
+  <section class="dashboard-hero-card featured-hero">
+    <div class="welcome-info">
+      <p class="section-kicker">Admin Workspace</p>
+      <h3 id="adminName">Welcome, Admin</h3>
+      <p id="adminMeta">Review doctor and lab profiles, approve valid registrations, and track rejected submissions from one place.</p>
+    </div>
+    <div class="dashboard-stats">
+      <div class="stat-card">
+        <p class="stat-label">Pending Reviews</p>
+        <p class="stat-value" id="pendingReviewCount">0</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Approved Profiles</p>
+        <p class="stat-value" id="approvedProfileCount">0</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Rejected Profiles</p>
+        <p class="stat-value" id="rejectedProfileCount">0</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Total Profiles</p>
+        <p class="stat-value" id="totalProfileCount">0</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="appointments-section">
+    <div class="section-head">
+      <h2>Doctor Profiles</h2>
+      <a href="#doctorPendingSection" class="section-link">Review queue</a>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="working-hours-box" id="doctorPendingSection">
+        <h3>Pending</h3>
+        <div id="pendingDoctors" class="doctor-grid"></div>
+      </div>
+
+      <div class="working-hours-box">
+        <h3>Approved</h3>
+        <div id="approvedDoctors" class="doctor-grid"></div>
+      </div>
+
+      <div class="working-hours-box">
+        <h3>Rejected</h3>
+        <div id="rejectedDoctors" class="doctor-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="appointments-section">
+    <div class="section-head">
+      <h2>Lab Profiles</h2>
+      <a href="#labPendingSection" class="section-link">Review queue</a>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="working-hours-box" id="labPendingSection">
+        <h3>Pending</h3>
+        <div id="pendingLabs" class="doctor-grid"></div>
+      </div>
+
+      <div class="working-hours-box">
+        <h3>Approved</h3>
+        <div id="approvedLabs" class="doctor-grid"></div>
+      </div>
+
+      <div class="working-hours-box">
+        <h3>Rejected</h3>
+        <div id="rejectedLabs" class="doctor-grid"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="authCheck.js"></script>
+<script type="module" src="admin-dashboard.js?v=20260327b"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

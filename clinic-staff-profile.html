@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Clinic Staff Profile - HealthPilot</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327c">
+</head>
+<body>
+
+<header class="primary-header">
+  <div class="logo">
+    <span>HealthPilot</span>
+  </div>
+  <div class="header-toolbar">
+    <nav class="primary-nav">
+      <a href="clinic-staff-dashboard.html#dashboard" class="active">Dashboard</a>
+      <a href="clinic-staff-appointments.html">Appointments</a>
+    </nav>
+    <div class="header-actions">
+      <button id="editWorkingHoursBtn" class="header-nav-btn" type="button">Edit Working Hours</button>
+      <div class="user-avatar-dropdown">
+        <button
+          type="button"
+          class="avatar-btn"
+          id="userAvatarBtn"
+          aria-label="Open user menu"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="userInitial">S</span>
+        </button>
+        <div class="user-menu" id="userMenu" role="menu" aria-label="User actions">
+          <button type="button" class="user-menu-btn" data-action="edit-profile">Edit Profile</button>
+          <button type="button" class="user-menu-btn" data-action="logout">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main-container">
+  <div class="profile-card">
+    <h2 class="page-title">Edit Staff Profile</h2>
+    <p class="profile-subtitle">Update the clinic staff profile details shown on your dashboard.</p>
+
+    <form id="staffProfileForm" class="form">
+      <label for="staffNameInput">Full Name</label>
+      <input type="text" id="staffNameInput" placeholder="e.g. Riya Sharma" required>
+
+      <label for="staffEmailInput">Email Address</label>
+      <input type="email" id="staffEmailInput" placeholder="name@example.com" required>
+
+      <label for="staffPhoneInput">Phone Number</label>
+      <input type="tel" id="staffPhoneInput" placeholder="+91xxxxxxxxxx" required>
+
+      <label for="staffClinicCodeInput">Clinic Code</label>
+      <input type="text" id="staffClinicCodeInput" readonly>
+
+      <div id="profileStatus" class="verification-help" aria-live="polite"></div>
+
+      <div class="form-actions">
+        <button type="submit">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script type="module" src="clinic-staff-profile.js?v=20260327c"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

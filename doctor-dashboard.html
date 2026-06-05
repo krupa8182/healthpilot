@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthPilot - Doctor</title>
+  <link rel="stylesheet" href="doctors.css?v=20260327h">
+</head>
+<body class="doctor-dashboard">
+
+<div class="navbar doctor-navbar">
+  <div class="logo doctor-logo">HealthPilot - Doctor</div>
+  <div class="doctor-navbar-actions">
+    <nav class="primary-nav doctor-header-nav" aria-label="Doctor navigation">
+      <a href="doctor-dashboard.html" class="active">Dashboard</a>
+      <a href="doctor-working-hours.html">Edit Hours</a>
+      <a href="doctor-clinic-staff.html">Clinic Staff</a>
+    </nav>
+    <div class="menu-wrapper" id="doctorMenuWrapper">
+      <button id="doctorMenuBtn" class="menu-btn profile-menu-btn" aria-label="Open profile menu" aria-expanded="false" type="button">DR</button>
+      <div id="doctorMenu" class="menu-dropdown" role="menu" aria-hidden="true">
+        <button id="editProfileBtn" class="menu-item" type="button">Edit Profile</button>
+        <button id="logoutBtn" class="menu-item logout-item" type="button">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container doctor-dashboard-overview">
+  <div class="dashboard-header">
+    <h1 id="clinicName">Clinic Dashboard</h1>
+    <p id="doctorName" class="doctor-welcome">Welcome, Doctor</p>
+    <p id="doctorEmail" class="doctor-email-text"></p>
+  </div>
+
+  <div class="stats-grid stats-grid--four">
+    <div class="stat-card">
+      <h3>Today's Appointments</h3>
+      <div class="stat-number" id="todayAppointments">0</div>
+    </div>
+    <div class="stat-card">
+      <h3>Pending Appointments</h3>
+      <div class="stat-number" id="pendingAppointments">0</div>
+    </div>
+    <div class="stat-card">
+      <h3>Total Patients</h3>
+      <div class="stat-number" id="totalPatients">0</div>
+    </div>
+    <div class="stat-card">
+      <h3>Revenue</h3>
+      <div class="stat-number" id="totalRevenue">Rs. 0</div>
+    </div>
+  </div>
+</div>
+
+<div class="container rejected-profile-banner is-hidden" id="doctorRejectedBanner">
+  <div>
+    <p class="rejected-profile-kicker">Profile Rejected</p>
+    <h3 id="doctorRejectedTitle">Your profile needs updates before it can go live.</h3>
+    <p id="doctorRejectedMessage" class="rejected-profile-message"></p>
+  </div>
+  <button id="doctorRejectedEditBtn" class="confirm-banner-btn" type="button">Edit Profile</button>
+</div>
+
+<div class="container">
+  <h2>Your Appointments</h2>
+  <p>Patients can book directly into your live available slots. Open Edit Working Hours whenever you need to block a specific timing.</p>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-status="approved">Upcoming</button>
+    <button class="tab-btn" data-status="cancelled">Cancelled</button>
+  </div>
+
+  <div id="appointmentsContainer"></div>
+</div>
+
+<div class="container working-hours-card is-hidden" id="clinicStaffSection">
+  <button id="backFromStaffBtn" class="back-link-btn" type="button">&#8592; Back to Dashboard</button>
+  <h2>Clinic Staff Management</h2>
+  <p>Manage your clinic receptionists and administrative staff.</p>
+
+  <div class="working-hours-box">
+    <h3>Clinic Access Code</h3>
+    <p>Your staff members need this code to join your clinic:</p>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <input type="text" id="clinicCodeDisplay" readonly style="flex: 1; font-family: monospace; font-size: 16px; padding: 8px;">
+      <button id="generateClinicCodeBtn" class="primary-btn" type="button">Generate New Code</button>
+    </div>
+    <p style="font-size: 12px; color: #666; margin-top: 5px;">Share this code with your staff so they can register as clinic staff.</p>
+  </div>
+
+  <div class="staff-list" id="staffListContainer">
+    <h3>Your Clinic Staff</h3>
+    <!-- Staff members will be listed here -->
+  </div>
+</div>
+
+<div class="container working-hours-card is-hidden" id="workingHoursSection">
+  <button id="backToDashboardBtn" class="back-link-btn" type="button">&#8592; Back to Dashboard</button>
+  <h2>Set Working Hours</h2>
+  <p class="working-hours-note">Choose your available days, clinic timings, and slot duration. You can edit this anytime.</p>
+
+  <div class="working-days-grid">
+    <label><input type="checkbox" class="working-day" value="0"> Sunday</label>
+    <label><input type="checkbox" class="working-day" value="1"> Monday</label>
+    <label><input type="checkbox" class="working-day" value="2"> Tuesday</label>
+    <label><input type="checkbox" class="working-day" value="3"> Wednesday</label>
+    <label><input type="checkbox" class="working-day" value="4"> Thursday</label>
+    <label><input type="checkbox" class="working-day" value="5"> Friday</label>
+    <label><input type="checkbox" class="working-day" value="6"> Saturday</label>
+  </div>
+
+  <div class="working-hours-grid">
+    <div class="time-block">
+      <label>Start Time</label>
+      <div class="time-selects">
+        <select id="startHour"></select>
+        <select id="startMinute">
+          <option value="00">00</option>
+          <option value="15">15</option>
+          <option value="30">30</option>
+          <option value="45">45</option>
+        </select>
+        <select id="startPeriod">
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="time-block">
+      <label>End Time</label>
+      <div class="time-selects">
+        <select id="endHour"></select>
+        <select id="endMinute">
+          <option value="00">00</option>
+          <option value="15">15</option>
+          <option value="30">30</option>
+          <option value="45">45</option>
+        </select>
+        <select id="endPeriod">
+          <option value="AM">AM</option>
+          <option value="PM">PM</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="time-block">
+      <label>Slot Duration (minutes)</label>
+      <select id="slotDuration">
+        <option value="15" selected>15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="lunch-break-block">
+    <h4>Lunch Break (Optional)</h4>
+    <p class="verification-help">Set a mid-day pause so patients can’t book while you’re away.</p>
+    <div class="time-picker-row">
+      <select id="lunchStartHour">
+        <option value="">Hour</option>
+      </select>
+      <select id="lunchStartMinute">
+        <option value="">Minute</option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+      </select>
+      <select id="lunchStartPeriod">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+      </select>
+    </div>
+    <div class="time-picker-row">
+      <select id="lunchEndHour">
+        <option value="">Hour</option>
+      </select>
+      <select id="lunchEndMinute">
+        <option value="">Minute</option>
+        <option value="00">00</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
+        <option value="45">45</option>
+      </select>
+      <select id="lunchEndPeriod">
+        <option value="AM">AM</option>
+        <option value="PM">PM</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="working-hours-box slot-blocker-box">
+    <h3>Block Specific Slots</h3>
+    <p>Select a date, then click an available slot to block it. Click a blocked slot again to reopen it.</p>
+    <label for="blockedSlotDate">Choose Date</label>
+    <input type="date" id="blockedSlotDate">
+    <p id="blockedSlotHelp" class="verification-help">Booked slots stay locked. Only open slots can be blocked or reopened.</p>
+    <div id="doctorBlockedSlotList"></div>
+  </div>
+
+  <button id="saveWorkingHours">Save Working Hours</button>
+</div>
+
+<script type="module" src="doctor-dashboard.js?v=20260327h"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+</body>
+</html>

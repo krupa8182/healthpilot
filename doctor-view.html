@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doctor Profile</title>
+<link rel="stylesheet" href="doctors.css">
+</head>
+
+<body data-flow-nav="back" data-flow-target="doctors.html" data-flow-label="Back to Doctors">
+
+<div class="navbar">
+  <div class="logo">HealthPilot</div>
+</div>
+
+<div class="profile-card">
+
+  <h2 id="doctorName"></h2>
+
+  <p><strong>Specialization:</strong> <span id="specialization"></span></p>
+  <p><strong>Clinic:</strong> <span id="clinic"></span></p>
+  <p><strong>Experience:</strong> <span id="experience"></span> years</p>
+  <p><strong>Consultation Fee:</strong> ₹<span id="fee"></span></p>
+
+  <button id="bookBtn">Book Appointment</button>
+
+</div>
+
+<script type="module" src="doctor-view.js"></script>
+<script type="module" src="back-button.js"></script>
+<script type="module" src="site-footer.js?v=20260327b"></script>
+
+</body>
+</html>
